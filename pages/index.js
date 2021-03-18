@@ -2,8 +2,9 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import useSWR from 'swr';
 import Link from 'next/link';
+import Image from "next/image"
 
-function Home({ data }) {
+function Home({data}) {
 
   // const { data, error } = useSWR('/api/people', (url) => 
   //   fetch(url).then(res => res.json())
@@ -18,6 +19,10 @@ function Home({ data }) {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div >
+        <Image width="890px" height="560px" src="/pc.jpg" />
+        {/* <img width="890px" height="560px" src="/pc.jpg" /> */}
+      </div>
       <h1 className={styles.reactdojo}>React Dojo Practice</h1>
 
       <ul>
@@ -32,6 +37,21 @@ function Home({ data }) {
     </div>
   )
 }
+
+// export async function getServerSideProps() {
+//   const res = await fetch('http://localhost:3000/api/people')
+//   const data = await res.json()
+
+//   if (!data) {
+//     return {
+//       notFound: true,
+//     }
+//   }
+
+//   return {
+//     props: { data }, // will be passed to the page component as props
+//   }
+// }
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:3000/api/people')

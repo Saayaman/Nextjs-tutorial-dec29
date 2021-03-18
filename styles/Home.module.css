@@ -7,6 +7,12 @@
   align-items: center;
 }
 
+.mainImage {
+  /* width: 800px; */
+  height: 400px;
+}
+
+
 .reactdojo {
   color: red; 
 }
