@@ -8,8 +8,7 @@ const One = ({ }) => {
   const { query } = useRouter();
   const { data, error } = useSWR(`/api/people/${query.id}`,
     (url) => fetch(url).then(res => res.json()))
-
-  console.log('data', data);
+  
 
   if(!data) return <div>Loading....</div>
   return (

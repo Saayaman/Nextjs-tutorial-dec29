@@ -1,16 +1,17 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import useSWR from 'swr';
 import Link from 'next/link';
 import Image from "next/image"
 
-function Home({data}) {
+function Home({}) {
 
-  // const { data, error } = useSWR('/api/people', (url) => 
-  //   fetch(url).then(res => res.json())
-  // );
+  const { data, error } = useSWR('/api/people', (url) => 
+    fetch(url).then(res => res.json())
+  );
 
   // if(error) return <div>Error</div>
-  if(!data) return <div>Loading...</div>
+  if(!data || data === []) return <div>Loading...</div>
 
   return (
     <div className={styles.container}>
@@ -37,21 +38,35 @@ function Home({data}) {
   )
 }
 
+// export async function getServerSideProps() {
+//   const res = await fetch('http://localhost:3000/api/people')
+//   const data = await res.json()
+
+//   if (!data) {
+//     return {
+//       props: { data: null }
+//     }
+//   }
+
+//   return {
+//     props: { data }, // will be passed to the page component as props
+//   }
+// }
 
 
-export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/api/people')
-  const data = await res.json()
+// export async function getStaticProps() {
+//   const res = await fetch('http://localhost:3000/api/people')
+//   const data = await res.json()
 
-  return {
-    props: {
-      data,
-    },
-    // // Next.js will attempt to re-generate the page:
-    // // - When a request comes in
-    // // - At most once every second
-    // revalidate: 1, // In seconds
-  }
-}
+//   return {
+//     props: {
+//       data,
+//     },
+//     // // Next.js will attempt to re-generate the page:
+//     // // - When a request comes in
+//     // // - At most once every second
+//     // revalidate: 1, // In seconds
+//   }
+// }
 
 export default Home;
