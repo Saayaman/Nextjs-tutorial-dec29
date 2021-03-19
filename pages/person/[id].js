@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-const One = () => {
+const One = ({ }) => {
+  //add `data` for static rendering
 
+  // commen/ this out is using static rendering
   const { query } = useRouter();
   const { data, error } = useSWR(`/api/people/${query.id}`,
     (url) => fetch(url).then(res => res.json()))
@@ -38,16 +40,26 @@ const One = () => {
   )
 }
 
-// export async function getStaticProps() {
-//   const { query } = useRouter();
+// export async function getStaticPaths() {
+//   const res = await fetch('http://localhost:3000/api/people')
+//   const people = await res.json()
 
-//   // Call an external API endpoint to get posts.
-//   // You can use any data fetching library
-//   const res = await fetch(`https://localhost:3000/api/people/${query.id}`)
+//   const paths = people.map(person => ({
+//     params: { id: person.id },
+//   }))
+
+//   console.log('paths', paths);
+//   return {
+//     paths, fallback: false //must be false for getStaticPaths
+//   };
+// }
+
+// export async function getStaticProps({ params }) {
+
+//   const res = await fetch(`http://localhost:3000/api/people/${params.id}`)
 //   const data = await res.json()
-
-//   // By returning { props: posts }, the Blog component
-//   // will receive `posts` as a prop at build time
+//   // By returning { props: data }, the Onw component
+//   // will receive `data` as a prop at build time
 //   return {
 //     props: {
 //       data,

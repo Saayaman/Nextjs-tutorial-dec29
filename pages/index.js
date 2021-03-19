@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import useSWR from 'swr';
 import Link from 'next/link';
 import Image from "next/image"
 
@@ -38,20 +37,7 @@ function Home({data}) {
   )
 }
 
-// export async function getServerSideProps() {
-//   const res = await fetch('http://localhost:3000/api/people')
-//   const data = await res.json()
 
-//   if (!data) {
-//     return {
-//       notFound: true,
-//     }
-//   }
-
-//   return {
-//     props: { data }, // will be passed to the page component as props
-//   }
-// }
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:3000/api/people')
